@@ -37,3 +37,39 @@ Outcomegoals:
 Technik:
 -Fragebogen? --> Aufgrund der Erreichbarkeit der FernFH Employees 
 
+
+AI-Chalange:
+REQ-001: „Das System soll Studierende nach sieben Tagen Inaktivität automatisch erinnern.“
+
+Annahmen:
+Fehlende Aktivität im System bedeutet, dass nicht gelernt wird und Unterstützung nötig ist.
+Sieben Tage sind für alle Studierenden und alle Semesterphasen die passende Schwelle.
+Fehlende Informationen
+Was zählt als „Inaktivität“, zum Beispiel Login, Abgaben oder Lektionen?
+Über welchen Kanal wird erinnert, mit welchem Inhalt, und lässt sich die Erinnerung abschalten?
+
+Stakeholder*innen
+Studierende: Bedarf, Akzeptanz, tatsächliche Lernrhythmen
+IT/Online Campus und Datenschutz: verfügbare Daten und ob die Auswertung zulässig ist
+
+Prüffragen
+„Wie lange lernen Sie typischerweise, ohne den Online Campus zu öffnen?“
+„Welche Benachrichtigungen empfinden Sie als hilfreich und welche als störend?“
+
+
+REQ-002: „Studierende sollen jeden Montag eine personalisierte Übersicht ihres Lernfortschritts erhalten.“
+Annahmen
+Studierende wünschen eine regelmäßige Übersicht, und Montag ist der passende Zeitpunkt.
+„Lernfortschritt“ lässt sich aus den vorhandenen Daten sinnvoll messen.
+
+Fehlende Informationen
+Was bedeuten „Lernfortschritt“ und „personalisiert“ konkret?
+Wer erstellt und versendet die Übersicht? Der Satz steht im Passiv, das ist offen.
+
+Stakeholder*innen
+Studierende: ob und wie sie eine Übersicht nutzen wollen
+Lehrende: was „Fortschritt“ in ihrer Lehrveranstaltung fachlich bedeutet
+
+Prüffragen
+„Wie verschaffen Sie sich heute einen Überblick, wo Sie im Studium stehen?“
+„Wann in der Woche planen Sie typischerweise Ihr Lernen?“
