@@ -8,7 +8,7 @@ Celar Luca
 Frank Lucas
 Stojanovic David
 Tuschl Sophie 
-
+Samonig Tobias
 
 Useful-Info:
 -Requirements should be documented with a unique ID e.g. REQ-001 (can be changed --> team decision).
