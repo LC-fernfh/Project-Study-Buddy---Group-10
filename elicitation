@@ -1,4 +1,4 @@
-Steakholdergroup:
+Stakeholdergroup:
 
 1. Students --> Relevanz: sehr wichtig
 Info needed: 
@@ -50,13 +50,23 @@ Erkenntnisziele (Outcome goals):
 Technik:
 -Fragebogen --> Aufgrund der Erreichbarkeit der Lehrenden (FernFH Employees), sie sind für den Inhalt des Study Buddys verantwortlich
 
+Interviewleitfaden: 
+1. Wie behalten sie derzeit den Überblick über den Lernerfolg der Studierenden?
+2. Wie erkennen sie das ein Studierender mit der Lernsituation überfordert ist? 
+3. Welche Informationen werden von Studierenden benötigt um einen Lernerfolg maßgeblich zu beeinflussen.
+4.Welche Informationen werden benötigt, um den richtigen Einschreitezeitpunkt zuverlässig zu bestimmen?
+5. Was muss Study Buddy anzeigen, damit sie wissen das ein Studierender überfordert ist?
+6. Ab welchen Zeitpunkt ist menschliches Eingreifen nötig? Welche Symptome müssen dafür auftreten? 
+7. Welche Informationen der Studierenden sind nötig, um die Funktionalität von Study Buddy zu gewährleisten?
+8. In welchen Situationen sind Studierende gestresst? Wie wirkt sich das aus? 
+9. Gibt es aus Ihrer Perspektive noch Fragen, die nicht besprochen wurden? 
 
 AI-Challenge:
 REQ-001: „Das System soll Studierende nach sieben Tagen Inaktivität automatisch erinnern.“
 
 Annahmen:
-Fehlende Aktivität im System bedeutet, dass nicht gelernt wird und Unterstützung nötig ist.
-Sieben Tage sind für alle Studierenden und alle Semesterphasen die passende Schwelle.
+- Fehlende Aktivität im System bedeutet, dass nicht gelernt wird und Unterstützung nötig ist.
+- Sieben Tage sind für alle Studierenden und alle Semesterphasen die passende Schwelle.
 Fehlende Informationen
 Was zählt als „Inaktivität“, zum Beispiel Login, Abgaben oder Lektionen?
 Über welchen Kanal wird erinnert, mit welchem Inhalt, und lässt sich die Erinnerung abschalten?
