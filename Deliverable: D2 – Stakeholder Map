@@ -1,4 +1,5 @@
-ndung
+02a Stakeholder*innen Inbox
+
 1. Identifizieren Sie die relevanten Stakeholder*innen und dokumentieren Sie deren Interessen, Erwartungen und mögliche Konflikte.
 -Studierendenvertretung:
 
@@ -35,3 +36,28 @@ ndung
 
 -IT & OnlineCampus:
   Begründung: Ohne zu wissen ob das Projekt technisch umsetzbar ist, ist das Projekt schwer umsetzbar. 
+
+
+
+
+
+02b Plot-Twist:
+What does this Change: 
+
+Handelt es sich um eine Anforderung, eine Rahmenbedingung oder eine Lösungsvorgabe?
+Es handelt sich um eine technische Rahmenbedingung, da diese verbindlich ist und sich dadurch nichts ändert?
+
+Welche möglichen Auswirkungen hat diese Vorgabe auf den Study Buddy?
+Die Auswirkung sorgt dafür, dass es leichter ist auf den Study Buddy zuzugreifen, es sicherer ist diesen zu verwenden, man muss keine weitere Software für die Authentifizierung anschaffen. 
+
+Welche Fragen müssen Sie mit der IT klären?
+-Wer betreut das System am Ende des Projekts?
+-Welche Zertifikate werden verwendet?
+-Wer ist der Administrator?
+-Wer ist die Ansprechperson?
+-Welches Authentifizierungssystem wird verwendet?
+-Was muss das System leisten?
+
+
+Welche weiteren Stakeholder könnten davon betroffen sein?
+Es sind alle Stakeholder*innen von der Rahmenbedingung betroffen die einen FernFH Account haben und auf das System zugreifen müssen. 
