@@ -3,6 +3,16 @@
 #### Studierendenvertretung
 #### Studiengangsleitung
 #### Lehrende
+Interessen & Erwartungen: 
+- Die LVs sind didaktisch verschieden aufgebaut, das soll respektiert werden; kein zusätzlicher Aufwand
+- Klären, welche Aktivitäten überhaupt relevant sind und welche Rolle Lehrende haben (Daten pflegen? automatisch benachrichtigt werden?)
+Bedenken:
+- Studierende werden wegen unvollständiger Daten falsch eingeschätzt; mehr Verwaltungsarbeit
+- Wenn der Buddy einen Fall meldet und die Lehrperson nicht reagiert, steht die Frage im Raum, ob sie dafür verantwortlich gemacht wird.#
+Konflikte:
+- Mit der Studiengangsleitung: Ein Frühwarnsystem auf Basis von Aktivitätsdaten passt nicht zu unterschiedlich aufgebauten LVs. Offen ist auch, wer auf Warnungen reagieren muss.
+- Mit der Studienadministration und der IT: Es ist ungeklärt, wer Inhalte und Daten pflegt. Außerdem droht der Druck, LVs zu vereinheitlichen, damit sie messbar werden.
+
 #### Studienadministration
 Interessen & Erwartungen
 - Entlastung bei Standardanfragen (Fristen, Zuständigkeiten, Ablauf)
