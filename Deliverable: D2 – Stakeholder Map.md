@@ -2,7 +2,7 @@
 ### 1. Identifizieren Sie die relevanten Stakeholder*innen und dokumentieren Sie deren Interessen, Erwartungen und mögliche Konflikte.
 #### Studierendenvertretung
 #### Studiengangsleitung
-#### Lehrende
+#### Lehrendenvertretung
 Interessen & Erwartungen: 
 - Die LVs sind didaktisch verschieden aufgebaut, das soll respektiert werden; kein zusätzlicher Aufwand
 - Klären, welche Aktivitäten überhaupt relevant sind und welche Rolle Lehrende haben (Daten pflegen? automatisch benachrichtigt werden?)
