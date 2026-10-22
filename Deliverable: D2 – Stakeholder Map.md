@@ -1,5 +1,5 @@
 ## 02a Stakeholder*innen Inbox
-1. Identifizieren Sie die relevanten Stakeholder*innen und dokumentieren Sie deren Interessen, Erwartungen und mögliche Konflikte.
+### 1. Identifizieren Sie die relevanten Stakeholder*innen und dokumentieren Sie deren Interessen, Erwartungen und mögliche Konflikte.
 #### Studierendenvertretung
 #### Studiengangsleitung
 #### Lehrende
@@ -40,23 +40,26 @@ Konflikte:
 - Study Buddy soll kein Überwachungssystem werden, sondern ein Frühwarnsystem. Es muss die Balance zwischen Unterstützung und Verhaltensanalyse gefunden werden
 
 
-2. Analysieren Sie Einfluss und Betroffenheit und visualisieren Sie Ihre Ergebnisse in einer Stakeholder Map.
+### 2. Analysieren Sie Einfluss und Betroffenheit und visualisieren Sie Ihre Ergebnisse in einer Stakeholder Map.
 
 
 
-3. Überlegen Sie, welche Stakeholder*innen möglicherweise noch fehlen.
+### 3. Überlegen Sie, welche Stakeholder*innen möglicherweise noch fehlen.
 - Studierenden
 - Qualitätsmanagement
 
-4. Wählen Sie drei Stakeholder*innen-Gruppen aus, die Sie in der nächsten Requirements-Elicitation-Phase zuerst einbeziehen würden, und begründen Sie Ihre Entscheidung.
+### 4. Wählen Sie drei Stakeholder*innen-Gruppen aus, die Sie in der nächsten Requirements-Elicitation-Phase zuerst einbeziehen würden, und begründen Sie Ihre Entscheidung.
 
-- Datenschutz & Informationssicherheit:
+- Datenschutz & Informationssicherheit
+  
   Begründung: Muss in einer frühen Phase berücksichtigt werden um zu verstehen welche Daten verwendet werden.
 
-- Studierendenvertretung & Studenten:
+- Studierendenvertretung & Studenten
+  
   Begründung: Ohne das Vertrauen der Studierenden wird das System nicht verwendet. 
 
-- IT & OnlineCampus:
+- IT & OnlineCampus
+  
   Begründung: Ohne zu wissen ob das Projekt technisch umsetzbar ist, ist das Projekt schwer umsetzbar. 
 
 
