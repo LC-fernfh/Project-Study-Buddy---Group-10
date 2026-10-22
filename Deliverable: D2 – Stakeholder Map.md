@@ -7,9 +7,11 @@
 Interessen & Erwartungen
 - Entlastung bei Standardanfragen (Fristen, Zuständigkeiten, Ablauf)
 - Einbindung in bestehende Prozesse statt neuer Parallelstrukturen
+  
 Befürchtungen & Bedenken:
 - Veraltete oder widersprüchliche Auskünfte des Bots/Buddys
 - Fehlende Differenzierung nach Studienphase (Anfänger vs. Absolvent)
+  
 Konfliktpotenzial:
 - Kollision mit technischer Machbarkeit:Dynamische, korrekte administrative Inhalte erfordern permanente manuelle Pflege 
 
