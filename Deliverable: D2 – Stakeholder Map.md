@@ -54,6 +54,7 @@ Konflikte:
 
 ### 2. Analysieren Sie Einfluss und Betroffenheit und visualisieren Sie Ihre Ergebnisse in einer Stakeholder Map.
 
+<img width="1588" height="903" alt="stakerholder-map" src="https://github.com/user-attachments/assets/b13efea5-aac4-4db8-ba7d-835496df8fdc" />
 
 
 ### 3. Überlegen Sie, welche Stakeholder*innen möglicherweise noch fehlen.
