@@ -6,15 +6,17 @@
 Interessen & Erwartungen: 
 - Die LVs sind didaktisch verschieden aufgebaut, das soll respektiert werden; kein zusätzlicher Aufwand
 - Klären, welche Aktivitäten überhaupt relevant sind und welche Rolle Lehrende haben (Daten pflegen? automatisch benachrichtigt werden?)
+  
 Bedenken:
 - Studierende werden wegen unvollständiger Daten falsch eingeschätzt; mehr Verwaltungsarbeit
-- Wenn der Buddy einen Fall meldet und die Lehrperson nicht reagiert, steht die Frage im Raum, ob sie dafür verantwortlich gemacht wird.#
+- Wenn der Buddy einen Fall meldet und die Lehrperson nicht reagiert, steht die Frage im Raum, ob sie dafür verantwortlich gemacht wird.
+  
 Konflikte:
 - Mit der Studiengangsleitung: Ein Frühwarnsystem auf Basis von Aktivitätsdaten passt nicht zu unterschiedlich aufgebauten LVs. Offen ist auch, wer auf Warnungen reagieren muss.
 - Mit der Studienadministration und der IT: Es ist ungeklärt, wer Inhalte und Daten pflegt. Außerdem droht der Druck, LVs zu vereinheitlichen, damit sie messbar werden.
 
 #### Studienadministration
-Interessen & Erwartungen
+Interessen & Erwartungen:
 - Entlastung bei Standardanfragen (Fristen, Zuständigkeiten, Ablauf)
 - Einbindung in bestehende Prozesse statt neuer Parallelstrukturen
   
@@ -54,24 +56,31 @@ Konflikte:
 
 ### 2. Analysieren Sie Einfluss und Betroffenheit und visualisieren Sie Ihre Ergebnisse in einer Stakeholder Map.
 
-<img width="1920" height="1080" alt="stakeholder-map" src="https://github.com/user-attachments/assets/3afe26e0-8c0b-4379-86c1-9a14c787ed30" />
+<img width="1920" height="1080" alt="stakerholder-map" src="https://github.com/user-attachments/assets/8286f359-013b-4e07-b857-7ef3a58984d7" />
+
 
 - **Studiengangsleitung**
+  
    Stellt das Budget und Inhalte bereit. Höchsten Einfluss und Eigeninteresse. Eng in alle Entscheidungen einbinden.
   
 - **IT & Online-Campus-Team**
+  
    Setzt das Projekt technisch um und hat hohes Interesse und Einfluss über Umsetzbarkeit des Study Buddy. Laufend einbinden.
   
 - **Datenschutz & Informationssicherheit**
+  
     Wenig Eigeninteresse am Projekterfolg, aber kann die Umsetzbarkeit des Projektes start beeinflussen. Früh genug in das Projekt einbinden.
   
 - **Studienadministration**
+  
     Kontrolliert den Studienverlauf und Inhalte, hat Einfluss auf die Qualität von Study Buddy, sollte deshalb regelmäßig informiert werden.
   
 - **Lehrendenvertretung**
+  
     Hohes Interesse, verwenden Study Buddy und haben Einblick in den Studienablauf. Früh genug einbinden.
   
 - **Studierendenvertretung**
+  
     Hohes Interesse der Studierenden, haben aber geringer Einfluss auf die Umsetzung von Study Buddy. Laufend informiert halten
 
   ### 3. Überlegen Sie, welche Stakeholder*innen möglicherweise noch fehlen.
