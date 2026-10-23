@@ -57,27 +57,21 @@ Konflikte:
 <img width="1588" height="903" alt="stakerholder-map" src="https://github.com/user-attachments/assets/b13efea5-aac4-4db8-ba7d-835496df8fdc" />
 
 - Studiengangsleitung
-  
   Stellt das Budget und Inhalte bereit. Höchsten Einfluss und Eigeninteresse. Eng in alle Entscheidungen einbinden.
   
 - IT & Online-Campus-Team
-  
   Setzt das Projekt technisch um und hat hohes Interesse und Einfluss über Umsetzbarkeit des Study Buddy. Laufend einbinden.
   
 - Datenschutz & Informationssicherheit
-  
   Wenig Eigeninteresse am Projekterfolg, aber kann die Umsetzbarkeit des Projektes start beeinflussen. Früh genug in das Projekt einbinden.
   
 - Studienadministration
-  
   Kontrolliert den Studienverlauf und Inhalte, hat Einfluss auf die Qualität von Study Buddy, sollte deshalb regelmäßig informiert werden.
   
 - Lehrendenvertretung
-  
   Hohes Interesse, verwenden Study Buddy und haben Einblick in den Studienablauf. Früh genug einbinden.
   
 - Studierendenvertretung
-  
   Hohes Interesse der Studierenden, haben aber geringer Einfluss auf die Umsetzung von Study Buddy. Laufend informiert halten
 
   ### 3. Überlegen Sie, welche Stakeholder*innen möglicherweise noch fehlen.
