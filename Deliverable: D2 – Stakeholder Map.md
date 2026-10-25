@@ -56,6 +56,17 @@ Konfliktpotenzial:
 - Kollision mit technischer Machbarkeit:Dynamische, korrekte administrative Inhalte erfordern permanente manuelle Pflege 
 
 #### IT & Online-Campus-Team 
+Interessen & Erwartungen:
+- Integration in den Studienalltag 
+- Digitalisierung und Automatisierung bestehender Prozesse
+  
+Befürchtungen & Bedenken:
+- Unklarheiten bei der Verteilung von Verantwortlichkeiten
+- Wie umsetzbar sind die Anforderungen und wie wird damit umgegangen, wenn eine Funktionalität nicht abgebildet werden kann?
+  
+Konfliktpotenzial:
+- Die gewünschte Umsetzung lässt sich ggf. nicht mit sämtlichem Funktionsumfang in die bestehende Systemlandschaft integrieren
+- Welche Szenarien verantwortet die IT und wofür sind andere Stakeholder verantwortlich?
 
 #### Datenschutz & Informationssicherheit
 Interessen:
