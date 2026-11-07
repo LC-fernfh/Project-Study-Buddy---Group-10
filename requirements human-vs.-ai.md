@@ -273,6 +273,82 @@ KI-Version: 23,2 Punkte
 
 Runde 4
 
+Finale Version REQ-002
+
+Strategie: INVESTIGATE
+
+Anforderung:
+Die Benutzeroberfläche des Study Buddys soll benutzerfreundlich sein und effizientes Arbeiten ermöglichen. Die Anforderungen im Hinblick auf Antwortzeiten, Bedienbarkeit und Benutzerfreundlichkeit werden im Rahmen von Befragungen der Studierenden eingeholt. 
+
+Offene Fragen:
+- Welche Funktionen müssen besonders schnell reagieren?
+- Welche Antwortzeiten sind akzeptabel?
+- Woran soll die Benutzerfreundlichkeit gemessen werden?
+
+Status: 
+Offen weil Konkretisierungsbedarf.
+
+Finale Version REQ-004
+
+Strategie: RECONSIDER  
+
+Anforderung:
+Die Anforderung wird in dieser Form nicht angenommen und folglich auch nicht umgesetzt. Alternativ soll untersucht werden, ob die vorhandenen Learning-Analytics-Daten zum einen rechtmäßig verwendbar sind und zum anderen ob sich Hinweise auf Betreuungsunterstützung ableiten lassen.  
+
+Offene Fragen:
+- Welche Daten stehen zur Verfügung?
+- Wie lässt sich der Unterstützungsbedarf definieren?
+- Wie wird mit Fehleinschätzungen umgegangen?
+
+Status: 
+Zurückgestellt, da essentielle Teile der Anforderung überarbeitet werden müssen. 
+
+Finale Version REQ-007
+
+Strategie: INVESTIGATE    
+
+Anforderung:
+Die Mitteilungseinstellungen sollen grundsätzlich von den Studierenden selbst verwaltet werden. Dabei sollen die Benachrichtigungen kategorisiert werden, da die Deaktivierung nicht bei allen Kategorien möglich sein soll. Dabei gilt es insbesondere den Widerspruch zwischen REQ-007 und REQ-008 abzustimmen.  
+
+Offene Fragen:
+- Welche Benachrichtigungskategorien sollen definiert werden?
+- Welche Kategorien sollen nicht deaktivierbar sein?
+
+Status: 
+Offen, da die Kategorien definert werden müssen und der Widerspruch zwischen REQ-007 und REQ-008 abgestimmt werden muss. 
+
+Finale Version REQ-009
+
+Strategie: RECONSIDER  
+
+Anforderung:
+Die Anforderung in ihrer ursprünglichen Form wird nicht umgesetzt. Vor einer neuen Anforderungsdefintion muss abgestimmt werden, welche Informationen in welchem Umfang und in welcher Form verarbeitet werden dürfen - und warum?   
+
+Offene Fragen:
+- Welche Daten sind erforderlich?
+- Welche Begründung gibt es für den Zugriff auf die Lernaktivität der Studierenden?
+- Wie sieht die Berechtigungsmatrix aus?
+
+Status: 
+Zurückgestellt, da essentielle Teile der Anforderung überarbeitet werden müssen. 
+
+Finale Version REQ-015
+
+Strategie: RECONSIDER  
+
+Anforderung:
+Die Anforderung wird in dieser Form nicht angenommen und folglich auch nicht umgesetzt. Zuerst ist zu prüfen wie sinnvoll eine solche KI-gestützte Analyse tatsächlich ist und ob diese überhaupt rechtskonform und technisch umsetzbar ist. Alternativ könnten im Study Buddy Hinweise angezeigt werden, welche auf Unterstützungsbedarf hindeuten und welche dann von den zuständigen Persinen geprüft wird. 
+
+Offene Fragen:
+- Welche Daten dürfen verwendet werden?
+- Wer übernimmt die Verantwortung für die Überprüfung der Datenqualität?
+- Wie werden falsche Einschätzungen gehandhabt und korrigiert?
+
+Status: 
+Zurückgestellt, da essentielle Teile der Anforderung überarbeitet werden müssen. 
+
+
+
 
 
   
