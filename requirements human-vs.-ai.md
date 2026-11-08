@@ -348,10 +348,66 @@ Status:
 Zurückgestellt, da essentielle Teile der Anforderung überarbeitet werden müssen. 
 
 
+## Teil 5 - Reflexion: Wer hat gewonnen?
 
+**Ergebnis Runde 3:** Unentschieden. Beide Versionen kommen im Schnitt auf **23,2 von 25 Punkten** (je 116/125).
+| REQ | Human | KI | Vorsprung |
+|---|---|---|---|
+| REQ-002 | 21 | 23 | KI |
+| REQ-004 | 23 | 22 | Human |
+| REQ-007 | 24 | 24 | – |
+| REQ-009 | 24 | 24 | – |
+| REQ-015 | 24 | 23 | Human |
 
+Die KI hat bei allen fünf Requirements dieselbe Strategie gewählt wie wir (INVESTIGATE für REQ-002 und REQ-007, RECONSIDER für REQ-004, REQ-009 und REQ-015).
+### 1. Bei welchen Qualitätskriterien war die KI besonders hilfreich, wo weniger zuverlässig?
+**Hilfreich:**
+- **Eindeutigkeit und Fachsprache:** Die KI hat Mängel präzise benannt, z. B. bei REQ-002 „subjektive und nicht operationalisierte Qualitätsbegriffe“ oder bei REQ-009 „Datenminimierung“, „Zweckbindung“ und „rollenbasierte Zugriffsbeschränkung“. Bei REQ-002 war die KI-Version deshalb klarer als unsere (5 vs. 4 Punkte).
+- **Überprüfbarkeit:** Bei REQ-002 hat die KI explizit festgehalten, dass die Anforderung erst als vollständig spezifiziert gilt, wenn Antwortzeitgrenzen und Usability-Akzeptanzkriterien festgelegt sind. Das ist eine gute Abnahmebedingung (4 vs. 3 Punkte).
+- **Zusätzliche offene Fragen:** Die KI hat Aspekte ergänzt, die wir nicht hatten, z. B. die Frage nach den **Zustellkanälen** (REQ-007), nach **aggregierten Daten** (REQ-009) und danach, ob das System bei REQ-015 **ausschließlich Entscheidungshilfen** bereitstellen soll.
 
-  
+**Weniger zuverlässig:**
+- **Verständlichkeit bei RECONSIDER-Fällen:** Bei REQ-004 und REQ-015 sind die „verbesserten Anforderungen“ der KI eigentlich Prüfaufträge („Vor einer Implementierung ist zu prüfen, ob …“). Sie klingen verbindlich, beschreiben aber keine Systemfunktion. Begriffe wie „statistisch belastbare Hinweise“ oder „fachliche Validierung“ bleiben unbestimmt (jeweils nur 4 Punkte bei Eindeutigkeit).
+- **Vage Einschränkungen:** Formulierungen wie „sofern fachlich oder rechtlich erforderlich“ (REQ-007) oder „für festgelegte, rechtmäßige Zwecke“ (REQ-009) verschieben die Unklarheit nur, statt sie offen als Frage zu markieren.
+- **Projektkontext:** Die KI kannte weder unsere Stakeholder-Analyse (D2) noch die Rahmenbedingungen aus 02b. Sie konnte daher keine Stakeholder für die offenen Fragen benennen und keine konkreten Konflikte (z. B. Studierendenvertretung vs. Studiengangsleitung) aufzeigen.
+### 2. Hat die KI Informationen ergänzt, die aus der Aufgabenstellung nicht hervorgingen?
+
+Nein, nicht im kritischen Sinn. Die KI hat **keine Zahlen, Zielwerte, Technologien oder Stakeholder-Entscheidungen erfunden**. Bei REQ-002 hat sie z. B. keine konkrete Antwortzeit gesetzt, und bei REQ-004 keine Mindestgenauigkeit, sondern nach „akzeptablen Fehlerraten“ gefragt.
+
+Wir führen das stark auf unseren Prompt zurück, der ausdrücklich verlangt hat: „Erfinde keine Stakeholderbedürfnisse, Interviewergebnisse, rechtlichen Freigaben oder technischen Rahmenbedingungen.“ Unsere Erkenntnis ist daher: **Die Qualität der KI-Antwort hängt stark davon ab, wie genau man ihr die Grenzen vorgibt.** Ob die KI ohne diese Einschränkung ebenfalls so vorsichtig gewesen wäre, haben wir nicht getestet.
+
+Ergänzt hat die KI lediglich Fachbegriffe und Konzepte (Zielvariable, Berechtigungskonzept, Korrekturmechanismen). Diese sind fachlich passend, aber ebenfalls nicht durch Stakeholder bestätigt.
+
+### 3. Hat die KI nur sprachlich verbessert oder auch die Notwendigkeit hinterfragt?
+
+Sie hat auch die **Notwendigkeit hinterfragt**. Bei REQ-004, REQ-009 und REQ-015 hat sie RECONSIDER empfohlen. Bei REQ-009 schreibt sie ausdrücklich, dass die Notwendigkeit des vollständigen Zugriffs nicht nachgewiesen ist. Bei REQ-004 hat sie, wie wir, das Ziel von „Abbruch vorhersagen“ auf „Unterstützungsbedarf erkennen“ verschoben.
+
+Der Unterschied liegt in der Konsequenz: Wir haben klar formuliert, dass die Anforderung **in dieser Form nicht übernommen** wird. Die KI liefert trotzdem eine „verbesserte Anforderung“, die wie ein Ersatz-Requirement wirkt. Das kann in der Praxis dazu verleiten, eine eigentlich zurückgestellte Anforderung doch in die Entwicklung zu geben.
+
+### 4. Gab es Fälle, in denen unsere Human Version überzeugender war? Warum?
+
+Ja, bei **REQ-004** und **REQ-015**:
+- **REQ-004:** Unsere Version hält eindeutig fest, dass die Anforderung in dieser Form nicht umsetzbar ist, und begründet dies (Prognose ist immer nur eine Wahrscheinlichkeit). Die KI-Version bleibt bei einem allgemeinen Prüfauftrag.
+- **REQ-015:** Wir haben die **menschliche Kontrollinstanz** als zentrales Problem herausgearbeitet und konkret gefragt, wer sie ist und wer die Datenqualität prüft. Die KI nennt Kontrollmechanismen nur allgemein.
+
+Der Hauptgrund: Wir kannten den Projektkontext aus D2 (z. B. die Forderung von Datenschutz, dass Studierende nicht automatisch als gefährdet eingestuft werden, und die Bedenken der Lehrendenvertretung zu Verantwortung). Die KI hatte nur den Anforderungstext.
+
+Selbstkritisch: Bei **REQ-002** war die KI besser. Unsere Version formuliert „werden Befragungen mit den Studierenden durchgeführt“ als feststehende Tatsache, obwohl das noch nicht entschieden ist. Außerdem fehlte eine klare Abnahmebedingung.
+
+### 5. Welche Rolle sollte generative KI künftig bei der Qualitätssicherung von Requirements spielen?
+
+Generative KI ist als **zweiter Prüfer** sinnvoll, nicht als Entscheidungsinstanz:
+- **Geeignet für:** Erkennen vager Begriffe, präzisere Fachsprache, Vorschläge für Akzeptanzkriterien und zusätzliche offene Fragen, die man selbst übersehen hat.
+- **Nicht geeignet für:** Entscheidungen über Notwendigkeit oder Zulässigkeit, Festlegen von Zielwerten, Auflösen von Stakeholder-Konflikten.
+
+Voraussetzungen für einen sinnvollen Einsatz:
+1. Ein **klarer Prompt**, der das Erfinden von Informationen ausdrücklich verbietet (bei uns entscheidend).
+2. Möglichst **Projektkontext mitgeben** (Stakeholder-Analyse, Rahmenbedingungen), sonst bleiben Abstimmungsfragen allgemein.
+3. **Menschliche Prüfung jeder KI-Ausgabe**, besonders bei Formulierungen, die verbindlich klingen, aber offen sind.
+
+### Fazit
+
+Punktemäßig gibt es keinen Sieger. Inhaltlich hat jede Seite eigene Stärken: Die KI formuliert präziser und denkt an zusätzliche Aspekte, wir bringen den Projektkontext ein und ziehen bei problematischen Anforderungen klarere Konsequenzen. Die besten Ergebnisse entstanden in der Kombination, wie die finalen Versionen in Runde 4 zeigen.  
 
 
 
