@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ordnung im Chaos</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: eine Arbeitsspalte, Fortschrittsleiste oben, jeder Teil der Aufgabe ein eigener Abschnitt, Katalog als breite Tabelle */
+:root{
+  color-scheme:light;
+  --bg:#EEF1F4; --surface:#FFFFFF; --field:#F7F9FA; --ink:#15222E; --muted:#566775; --line:#D3DAE1;
+  --accent:#0E6B7A; --accent-ink:#FFFFFF; --accent-soft:#DCEFF2;
+  --ok:#1D7448; --ok-soft:#DDF1E6; --warn:#8F5600; --warn-soft:#FBEBCF; --bad:#A8321F;
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F171E; --surface:#17222C; --field:#111B23; --ink:#E6EDF2; --muted:#93A4B2; --line:#2B3A47;
+  --accent:#4FB6C6; --accent-ink:#07171B; --accent-soft:#15343B;
+  --ok:#5CC28C; --ok-soft:#17332A; --warn:#E3A94B; --warn-soft:#382B12; --bad:#F08A76; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F171E; --surface:#17222C; --field:#111B23; --ink:#E6EDF2; --muted:#93A4B2; --line:#2B3A47;
+  --accent:#4FB6C6; --accent-ink:#07171B; --accent-soft:#15343B;
+  --ok:#5CC28C; --ok-soft:#17332A; --warn:#E3A94B; --warn-soft:#382B12; --bad:#F08A76; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body)}
+.wrap{max-width:1000px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(30px,5vw,44px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:24px;font-weight:700}
+h3{font-size:16px;font-weight:600}
+p{margin:0}
+.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.lead{color:var(--muted);max-width:65ch}
+.muted{color:var(--muted)}
+.mono{font-family:var(--f-mono)}
+
+header.top{display:flex;flex-direction:column;gap:12px}
+.team{display:grid;grid-template-columns:1fr 2fr;gap:12px;margin-top:6px}
+@media(max-width:640px){.team{grid-template-columns:1fr}}
+
+label.f{display:flex;flex-direction:column;gap:4px;font-weight:500;font-size:13px;min-width:0}
+label.f small{font-weight:400;color:var(--muted);font-size:12.5px}
+input[type=text],input[type=url],textarea,select{
+  font:inherit;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:6px;padding:8px 10px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:72px;line-height:1.45}
+input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.progress{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:640px){.progress{grid-template-columns:repeat(2,1fr)}}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.step b{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.step span{font-weight:600}
+.step.done{border-color:var(--ok);background:var(--ok-soft)}
+.step.done b{color:var(--ok)}
+
+section.part{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.part-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.part-head .t{display:flex;flex-direction:column;gap:6px}
+.pill{font:500 12px/1 var(--f-mono);padding:6px 9px;border-radius:99px;background:var(--warn-soft);color:var(--warn);white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+
+.picks{display:flex;flex-direction:column;gap:8px}
+.pick{display:flex;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--field);cursor:pointer}
+.pick input{width:18px;height:18px;accent-color:var(--accent)}
+.pick.on{border-color:var(--accent);background:var(--accent-soft)}
+
+.card{border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:14px;background:var(--bg)}
+.card blockquote{margin:0;font:600 17px/1.35 var(--f-display)}
+.cstep{display:grid;grid-template-columns:200px 1fr;gap:12px;align-items:start}
+@media(max-width:700px){.cstep{grid-template-columns:1fr}}
+.cstep .l{font-weight:600;font-size:14px}
+.cstep .l small{display:block;font-weight:400;color:var(--muted);font-size:12.5px;margin-top:2px}
+
+details{border:1px dashed var(--line);border-radius:8px;padding:10px 12px}
+summary{cursor:pointer;font-weight:600}
+details dl{margin:10px 0 0;display:grid;grid-template-columns:150px 1fr;gap:6px 12px;font-size:14px}
+@media(max-width:600px){details dl{grid-template-columns:1fr}}
+details dt{font-weight:600}details dd{margin:0}
+
+.radios{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(max-width:640px){.radios{grid-template-columns:1fr}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+
+.checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.chip{border:1px solid var(--line);border-radius:8px;padding:9px 11px;display:flex;flex-direction:column;gap:3px;background:var(--bg)}
+.chip .n{font:500 18px/1.1 var(--f-mono);font-variant-numeric:tabular-nums}
+.chip .d{font-size:12.5px;color:var(--muted)}
+.chip.ok{border-color:var(--ok);background:var(--ok-soft)}
+.chip.ok .n{color:var(--ok)}
+.chip .hint{font-size:12px;color:var(--warn)}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;min-width:1000px;width:100%}
+th{font:500 11px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;text-align:left;color:var(--muted);padding:10px 6px;background:var(--bg);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:5px;vertical-align:top;border-bottom:1px solid var(--line)}
+td input,td select,td textarea{padding:6px 7px;font-size:13.5px}
+td textarea{min-height:52px}
+tr.ex td{background:var(--accent-soft)}
+tr.bad td.cid input{border-color:var(--bad)}
+td.cid input{font-family:var(--f-mono)}
+.tag{display:inline-block;font:500 10px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding:2px 0 4px}
+
+button{font:inherit;font-weight:600;border-radius:6px;padding:9px 14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+button.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button:hover{filter:brightness(.96)}
+button.x{padding:4px 8px;color:var(--bad);font-weight:500}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+.folders{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px}
+.folders label{display:flex;gap:8px;align-items:center;font-family:var(--f-mono);font-size:13px}
+.folders input{width:16px;height:16px;accent-color:var(--accent)}
+
+.out textarea{font:12.5px/1.45 var(--f-mono);min-height:260px}
+.note{padding:10px 12px;border-radius:8px;background:var(--warn-soft);color:var(--warn);font-size:13.5px}
+ol.how{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+@media(prefers-reduced-motion:no-preference){.step,.chip,.pick{transition:background .15s,border-color .15s}}
+body{margin:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">Mission 04 · Aufgabe 04 · Deliverable D4</span>
+    <h1>Ordnung im Chaos</h1>
+    <p class="lead">Teil A und B (Art und Ebene zuordnen) macht ihr einzeln im Moodle-Test. Hier arbeitet ihr als Team: zwei unscharfe Anforderungen zerlegen, den Plot Twist einordnen und euren Anforderungskatalog aufbauen. Euer Stand wird in diesem Browser gespeichert. Am Ende erzeugt ihr einen Abgabetext für die Moodle-Gruppenabgabe.</p>
+    <div class="team">
+      <label class="f">Gruppenname <small>genau so, wie er in Moodle heißt</small>
+        <input type="text" id="team" data-k="team" autocomplete="off" placeholder="z. B. RE-Team 3"></label>
+      <label class="f">Mitglieder <small>Vor- und Nachnamen, durch Komma getrennt</small>
+        <input type="text" id="members" data-k="members" autocomplete="off" placeholder="Anna Muster, Ben Beispiel, …"></label>
+    </div>
+  </header>
+
+  <div class="progress" id="progress"></div>
+
+  <!-- TEIL C -->
+  <section class="part" id="part-c">
+    <div class="part-head">
+      <div class="t"><span class="eyebrow">Teil C</span><h2>Zerlegen statt etikettieren</h2></div>
+      <span class="pill" data-part="c">offen</span>
+    </div>
+    <p class="lead">Der Product Owner hat drei Sätze geliefert, die in der Mission 03 durchgefallen sind. Wählt genau zwei davon. Für jeden prüft ihr fünf Schritte.</p>
+    <div class="picks" id="picks"></div>
+    <details>
+      <summary>Beispiel an einer anderen Aussage: „Das System soll sicher sein.“</summary>
+      <dl>
+        <dt>1 · Unklar</dt><dd>Sicher wogegen: Datenverlust oder Zugriff Unbefugter? Um welche Daten geht es? Gibt es Vorgaben wie die DSGVO?</dd>
+        <dt>2 · Funktion</dt><dd>Das System muss Nutzende vor dem Zugriff auf persönliche Daten anmelden.</dd>
+        <dt>3 · Qualität</dt><dd>Personenbezogene Daten werden bei der Übertragung mit TLS 1.2 oder höher verschlüsselt, bei 100 % der Verbindungen.</dd>
+        <dt>4 · Randbedingung</dt><dd>DSGVO, Quelle: Datenschutzbeauftragte der FernFH.</dd>
+        <dt>5 · Ebene</dt><dd>System, abgeleitet aus dem User-Bedarf „Meine Daten sind geschützt“.</dd>
+      </dl>
+    </details>
+    <div id="cards" style="display:flex;flex-direction:column;gap:16px"></div>
+  </section>
+
+  <!-- PLOT TWIST -->
+  <section class="part" id="part-twist">
+    <div class="part-head">
+      <div class="t"><span class="eyebrow">Plot Twist</span><h2>Die Campus-App muss auch als Web-App funktionieren</h2></div>
+      <span class="pill" data-part="twist">offen</span>
+    </div>
+    <p class="lead">Neue Nachricht von der IT: „Die Campus-App muss ab sofort auch als Web-App funktionieren.“ Was ist das?</p>
+    <div class="radios" role="radiogroup" aria-label="Art der Anforderung">
+      <label class="pick"><input type="radio" name="twistart" data-k="twist.art" value="Funktional"> Funktionale Anforderung</label>
+      <label class="pick"><input type="radio" name="twistart" data-k="twist.art" value="Qualität"> Qualitätsanforderung</label>
+      <label class="pick"><input type="radio" name="twistart" data-k="twist.art" value="Randbedingung"> Randbedingung</label>
+    </div>
+    <label class="f">Begründung <small>Woran habt ihr es erkannt? Wer hat die Vorgabe gemacht, und was folgt daraus?</small>
+      <textarea id="twistwhy" data-k="twist.why"></textarea></label>
+    <div class="two">
+      <label class="f">Rückfrage 1 <input type="text" data-k="twist.q1" autocomplete="off"></label>
+      <label class="f">Rückfrage 2 <input type="text" data-k="twist.q2" autocomplete="off"></label>
+    </div>
+  </section>
+
+  <!-- TEIL D -->
+  <section class="part" id="part-d">
+    <div class="part-head">
+      <div class="t"><span class="eyebrow">Teil D · Deliverable D4</span><h2>Structured Requirements Catalogue</h2></div>
+      <span class="pill" data-part="d">offen</span>
+    </div>
+    <p class="lead">Sammelt alle Aussagen aus den Missionen 01 bis 03 in einer Rohliste und ordnet jede nach Art, Ebene und Quelle ein. Unklares gehört auf die Liste offener Fragen und nicht in den Katalog. Die blauen Zeilen sind Beispiele und zählen nicht mit.</p>
+
+    <h3>Prüfliste</h3>
+    <div class="checks" id="checks"></div>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>ID</th><th>Titel</th><th>Text</th><th>Art</th><th>Ebene</th><th>Quelle</th><th>Bezug</th><th>Status</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div class="row">
+      <button class="pri" id="addrow" type="button">Zeile hinzufügen</button>
+      <button id="rmex" type="button">Beispielzeilen entfernen</button>
+      <span class="muted" style="font-size:13px">Die Priorität bleibt leer bis Mission 06.</span>
+    </div>
+
+    <h3>Repository-Struktur</h3>
+    <p class="muted">Legt diese Ordner in eurem Team-Repository an und hakt sie ab.</p>
+    <div class="folders" id="folders"></div>
+    <label class="f">Link zum Repository <small>optional, falls es online liegt</small>
+      <input type="url" data-k="repo" autocomplete="off" placeholder="https://…"></label>
+  </section>
+
+  <!-- REFLEXION -->
+  <section class="part" id="part-refl">
+    <div class="part-head">
+      <div class="t"><span class="eyebrow">Reflexion</span><h2>Was nehmt ihr mit?</h2></div>
+      <span class="pill" data-part="refl">offen</span>
+    </div>
+    <label class="f">Welche Anforderung war am schwersten einzuordnen, und warum? <textarea data-k="refl.r1"></textarea></label>
+    <label class="f">Welche Rückfrage hättet ihr schon in Mission 01 stellen sollen? <textarea data-k="refl.r2"></textarea></label>
+    <label class="f">Wie hilft euch die Unterscheidung von Art und Ebene bei künftigen Konflikten? <textarea data-k="refl.r3"></textarea></label>
+  </section>
+
+  <!-- ABGABE -->
+  <section class="part out" id="part-out">
+    <div class="part-head"><div class="t"><span class="eyebrow">Abgabe</span><h2>Abgabetext für Moodle</h2></div></div>
+    <ol class="how">
+      <li>Gruppenname eintragen und „Abgabetext erzeugen“ wählen.</li>
+      <li>Text kopieren oder als Datei sichern.</li>
+      <li>In Moodle bei Aufgabe 04 als Gruppenabgabe einfügen oder die Datei hochladen. Eine Person pro Gruppe reicht.</li>
+    </ol>
+    <div class="row">
+      <button class="pri" id="gen" type="button">Abgabetext erzeugen</button>
+      <button id="copy" type="button" hidden>Kopieren</button>
+      <button id="dl" type="button" hidden>Als Datei sichern</button>
+      <span id="msg" class="muted" role="status"></span>
+    </div>
+    <div id="warn" class="note" hidden></div>
+    <textarea id="outtext" readonly hidden aria-label="Abgabetext"></textarea>
+
+    <h3>Arbeitsstand weitergeben</h3>
+    <p class="muted">Der Abgabetext enthält am Ende einen Arbeitsstand-Block. Wer ihn hier einfügt, arbeitet am selben Stand weiter, auch auf einem anderen Gerät.</p>
+    <textarea id="imptext" placeholder="Abgabetext oder Arbeitsstand hier einfügen" style="min-height:90px"></textarea>
+    <div class="row"><button id="imp" type="button">Arbeitsstand laden</button><span id="impmsg" class="muted" role="status"></span></div>
+  </section>
+</div>
+
+<script>
+(function(){
+var KEY='fernfh-re-aufgabe04-v1';
+var BAD=[
+  {id:'ben',t:'Das System sollte benutzerfreundlich sein.'},
+  {id:'schn',t:'Die App sollte schnell antworten.'},
+  {id:'rel',t:'Alle relevanten Informationen sollten angezeigt werden.'}];
+var STEPS=[
+  ['q1','1 · Was ist unklar?','Formuliert drei Rückfragen an den Product Owner.','ta'],
+  ['q2','2 · Funktion','Enthält die Aussage eine Funktion? Formuliert sie neu.','ta'],
+  ['q3','3 · Qualität','Messgröße, Zielwert und Bedingung nennen.','ta'],
+  ['q4','4 · Randbedingung','Steckt eine Vorgabe dahinter? Welche, und von wem?','ta'],
+  ['q5','5 · Ebene','Auf welcher Ebene liegen eure Ergebnisse?','sel']];
+var FOLDERS=['00_Projekt','01_Stakeholder','02_Anforderungskatalog','03_Glossar','04_Randbedingungen','05_Entscheidungen','06_Reflexion'];
+var ARTS=['Funktional','Qualität','Randbedingung'];
+var EBENEN=['Business','User','System'];
+var STATI=['Entwurf','Abgestimmt','Verworfen'];
+
+function seed(){return [
+  {id:'BSP-1',title:'Weniger Studienabbrüche',text:'Die FernFH will die Abbruchquote im ersten Studienjahr binnen zwei Jahren um 10 % senken.',art:'Funktional',ebene:'Business',src:'Hochschulleitung, Briefing',ref:'',status:'Entwurf',ex:true},
+  {id:'BSP-2',title:'Früh Hilfe bekommen',text:'Als Studentin will ich früh merken, dass ich zurückfalle, und gezielt Hilfe bekommen.',art:'Funktional',ebene:'User',src:'Studierendenvertretung',ref:'BSP-1',status:'Entwurf',ex:true},
+  {id:'BSP-3',title:'Hinweis bei Inaktivität',text:'Das System muss nach 14 Tagen ohne Kursaktivität einen Hinweis mit Beratungsangeboten anzeigen.',art:'Funktional',ebene:'System',src:'Interview Studienservice',ref:'BSP-2',status:'Entwurf',ex:true}];}
+function blank(){return {team:'',members:'',repo:'',picks:[],c:{},twist:{art:'',why:'',q1:'',q2:''},rows:seed(),folders:{},refl:{r1:'',r2:'',r3:''}};}
+var S=blank();
+
+function str(v,n){return typeof v==='string'?v.slice(0,n||4000):'';}
+function adopt(o){
+  var b=blank();
+  if(!o||typeof o!=='object')return b;
+  b.team=str(o.team,120);b.members=str(o.members,400);b.repo=str(o.repo,300);
+  if(Array.isArray(o.picks))b.picks=o.picks.filter(function(p){return BAD.some(function(x){return x.id===p;});}).slice(0,2);
+  BAD.forEach(function(x){var src=(o.c&&o.c[x.id])||{};b.c[x.id]={};STEPS.forEach(function(s){b.c[x.id][s[0]]=str(src[s[0]]);});});
+  if(o.twist){b.twist={art:ARTS.indexOf(o.twist.art)>-1?o.twist.art:'',why:str(o.twist.why),q1:str(o.twist.q1,300),q2:str(o.twist.q2,300)};}
+  if(Array.isArray(o.rows)){b.rows=o.rows.slice(0,300).map(function(r){r=r||{};return {
+    id:str(r.id,30),title:str(r.title,120),text:str(r.text,1000),
+    art:ARTS.indexOf(r.art)>-1?r.art:'',ebene:EBENEN.indexOf(r.ebene)>-1?r.ebene:'',
+    src:str(r.src,200),ref:str(r.ref,30),status:STATI.indexOf(r.status)>-1?r.status:'Entwurf',ex:r.ex===true};});}
+  FOLDERS.forEach(function(f){b.folders[f]=!!(o.folders&&o.folders[f]===true);});
+  if(o.refl){b.refl={r1:str(o.refl.r1),r2:str(o.refl.r2),r3:str(o.refl.r3)};}
+  return b;
+}
+function load(){try{var t=localStorage.getItem(KEY);if(t)S=adopt(JSON.parse(t));}catch(e){}}
+var saveT=null;
+function save(){clearTimeout(saveT);saveT=setTimeout(function(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}},300);}
+
+function h(tag,attrs){
+  var e=document.createElement(tag);attrs=attrs||{};
+  Object.keys(attrs).forEach(function(k){var v=attrs[k];
+    if(k==='class')e.className=v;
+    else if(k.slice(0,2)==='on')e.addEventListener(k.slice(2),v);
+    else if(v===true)e.setAttribute(k,'');
+    else if(v!==false&&v!=null)e.setAttribute(k,v);});
+  var add=function(c){
+    if(c==null||c===false)return;
+    if(Array.isArray(c)){c.forEach(add);return;}
+    e.append(c instanceof Node?c:document.createTextNode(String(c)));
+  };
+  for(var i=2;i<arguments.length;i++)add(arguments[i]);
+  return e;
+}
+function getp(o,p){return p.split('.').reduce(function(a,k){return a&&a[k];},o);}
+function setp(o,p,v){var ks=p.split('.'),l=ks.pop();var t=ks.reduce(function(a,k){if(!a[k]||typeof a[k]!=='object')a[k]={};return a[k];},o);t[l]=v;}
+
+function syncForm(){
+  document.querySelectorAll('[data-k]').forEach(function(el){
+    var v=getp(S,el.dataset.k);
+    if(el.type==='checkbox')el.checked=v===true;
+    else if(el.type==='radio'){el.checked=v===el.value;el.closest('.pick')&&el.closest('.pick').classList.toggle('on',el.checked);}
+    else el.value=typeof v==='string'?v:'';
+  });
+}
+function onField(e){
+  var t=e.target,k=t.dataset&&t.dataset.k;if(!k)return;
+  var v;
+  if(t.type==='checkbox')v=t.checked;
+  else if(t.type==='radio'){if(!t.checked)return;v=t.value;document.querySelectorAll('input[name="'+t.name+'"]').forEach(function(r){r.closest('.pick').classList.toggle('on',r.checked);});}
+  else v=t.value;
+  setp(S,k,v);changed();
+}
+document.addEventListener('input',onField);
+document.addEventListener('change',onField);
+
+/* ---------- Teil C ---------- */
+function renderPicks(){
+  var box=document.getElementById('picks');box.textContent='';
+  BAD.forEach(function(x){
+    var cb=h('input',{type:'checkbox'});cb.checked=S.picks.indexOf(x.id)>-1;
+    cb.addEventListener('change',function(){
+      var i=S.picks.indexOf(x.id);
+      if(cb.checked&&i<0)S.picks.push(x.id);
+      if(!cb.checked&&i>-1)S.picks.splice(i,1);
+      while(S.picks.length>2)S.picks.shift();
+      renderPicks();renderCards();changed();
+    });
+    box.append(h('label',{class:'pick'+(cb.checked?' on':'')},cb,h('span',{},'„'+x.t+'“')));
+  });
+  box.append(h('p',{class:'muted',style:'font-size:13px'},S.picks.length+' von 2 gewählt'));
+}
+function renderCards(){
+  var box=document.getElementById('cards');box.textContent='';
+  S.picks.forEach(function(id){
+    var x=BAD.filter(function(b){return b.id===id;})[0];
+    var card=h('div',{class:'card'},h('blockquote',{},'„'+x.t+'“'));
+    STEPS.forEach(function(s){
+      var f;
+      if(s[3]==='sel'){f=h('select',{'data-k':'c.'+id+'.'+s[0],'aria-label':s[1]},h('option',{value:''},'bitte wählen'),EBENEN.map(function(e){return h('option',{value:e},e);}));}
+      else f=h('textarea',{'data-k':'c.'+id+'.'+s[0],'aria-label':s[1]});
+      card.append(h('div',{class:'cstep'},h('div',{class:'l'},s[1],h('small',{},s[2])),f));
+    });
+    box.append(card);
+  });
+  syncForm();
+}
+
+/* ---------- Teil D: Tabelle ---------- */
+function opt(list,blankLabel){var a=[];if(blankLabel!==undefined)a.push(h('option',{value:''},blankLabel));list.forEach(function(v){a.push(h('option',{value:v},v));});return a;}
+function cell(row,field,el){
+  el.value=row[field];
+  var ev=el.tagName==='SELECT'?'change':'input';
+  el.addEventListener(ev,function(){row[field]=el.value;changed();});
+  return h('td',{class:field==='id'?'cid':''},el);
+}
+function nextId(){
+  var n=0;S.rows.forEach(function(r){var m=/^REQ-(\d+)$/.exec(r.id);if(m)n=Math.max(n,+m[1]);});
+  return 'REQ-'+String(n+1).padStart(3,'0');
+}
+function renderRows(){
+  var tb=document.getElementById('rows');tb.textContent='';
+  S.rows.forEach(function(row,i){
+    var tr=h('tr',{class:row.ex?'ex':'',title:row.ex?'Beispielzeile, zählt nicht mit':null});
+    var idIn=h('input',{type:'text','aria-label':'ID',autocomplete:'off'});
+    var c0=cell(row,'id',idIn);
+    if(row.ex)c0.prepend(h('div',{class:'tag'},'Beispiel'));
+    tr.append(c0,
+      cell(row,'title',h('input',{type:'text','aria-label':'Titel',autocomplete:'off'})),
+      cell(row,'text',h('textarea',{'aria-label':'Text'})),
+      cell(row,'art',h('select',{'aria-label':'Art'},opt(ARTS,'–'))),
+      cell(row,'ebene',h('select',{'aria-label':'Ebene'},opt(EBENEN,'–'))),
+      cell(row,'src',h('input',{type:'text','aria-label':'Quelle',autocomplete:'off'})),
+      cell(row,'ref',h('input',{type:'text','aria-label':'Bezug',autocomplete:'off',class:'mono'})),
+      cell(row,'status',h('select',{'aria-label':'Status'},opt(STATI))),
+      h('td',{},h('button',{class:'x',type:'button','aria-label':'Zeile löschen',onclick:function(){S.rows.splice(S.rows.indexOf(row),1);renderRows();changed();}},'✕')));
+    tb.append(tr);
+  });
+}
+
+/* ---------- Prüfungen ---------- */
+function analyse(){
+  var R=S.rows.filter(function(r){return !r.ex&&r.id.trim()&&r.text.trim().length>=8;});
+  var cnt=function(f,v){return R.filter(function(r){return r[f]===v;}).length;};
+  var ids={},dup=[];
+  S.rows.filter(function(r){return !r.ex;}).forEach(function(r){var k=r.id.trim();if(!k)return;if(ids[k])dup.push(k);ids[k]=true;});
+  var upper={};R.forEach(function(r){if(r.ebene==='Business'||r.ebene==='User')upper[r.id.trim()]=true;});
+  var sys=R.filter(function(r){return r.ebene==='System';});
+  var sysOk=sys.filter(function(r){return upper[r.ref.trim()];});
+  var qOk=R.filter(function(r){return r.art==='Qualität'&&/\d/.test(r.text);}).length;
+  var rbOk=R.filter(function(r){return r.art==='Randbedingung'&&r.src.trim().length>=3;}).length;
+  var folders=FOLDERS.filter(function(f){return S.folders[f];}).length;
+  var list=[
+    {l:'Anforderungen gesamt',have:R.length,need:25},
+    {l:'Business',have:cnt('ebene','Business'),need:5},
+    {l:'User',have:cnt('ebene','User'),need:8},
+    {l:'System',have:cnt('ebene','System'),need:12},
+    {l:'Qualität mit Zahl',have:qOk,need:5,hint:'Im Text muss ein Zielwert stehen.'},
+    {l:'Randbedingungen mit Quelle',have:rbOk,need:5,hint:'Quelle ausfüllen.'},
+    {l:'Systemzeilen mit gültigem Bezug',have:sysOk.length,need:Math.max(12,sys.length),hint:sys.length&&sysOk.length<sys.length?'Bezug fehlt oder verweist ins Leere: '+sys.filter(function(r){return !upper[r.ref.trim()];}).slice(0,4).map(function(r){return r.id.trim();}).join(', '):'Bezug auf eine User- oder Business-ID.'},
+    {l:'Eindeutige IDs',have:dup.length?0:1,need:1,hint:dup.length?'Doppelt: '+dup.slice(0,4).join(', '):'',fmt:function(c){return c.have?'ok':'doppelt';}},
+    {l:'Ordner angelegt',have:folders,need:FOLDERS.length}];
+  list.forEach(function(c){c.ok=c.have>=c.need;});
+  return {R:R,list:list,dup:dup};
+}
+function longer(s,n){return (s||'').trim().length>=n;}
+function status(){
+  var a=analyse();
+  var c=S.picks.length===2&&S.picks.every(function(id){var d=S.c[id]||{};return longer(d.q1,10)&&longer(d.q2,10)&&longer(d.q3,10)&&longer(d.q4,10)&&!!d.q5;});
+  var t=!!S.twist.art&&longer(S.twist.why,30)&&longer(S.twist.q1,8)&&longer(S.twist.q2,8);
+  var d=a.list.every(function(x){return x.ok;});
+  var r=longer(S.refl.r1,20)&&longer(S.refl.r2,20)&&longer(S.refl.r3,20);
+  return {c:c,twist:t,d:d,refl:r,a:a};
+}
+function updateChecks(st){
+  var box=document.getElementById('checks');box.textContent='';
+  st.a.list.forEach(function(c){
+    var num=c.fmt?c.fmt(c):(c.have+' / '+c.need);
+    var chip=h('div',{class:'chip'+(c.ok?' ok':'')},h('span',{class:'n'},num),h('span',{class:'d'},c.l));
+    if(!c.ok&&c.hint)chip.append(h('span',{class:'hint'},c.hint));
+    box.append(chip);
+  });
+}
+function updateProgress(st){
+  var items=[['c','Teil C','Zerlegen'],['twist','Plot Twist','Einordnen'],['d','Teil D','Katalog'],['refl','Reflexion','Lernschritt']];
+  var box=document.getElementById('progress');box.textContent='';
+  items.forEach(function(it){
+    box.append(h('div',{class:'step'+(st[it[0]]?' done':'')},h('b',{},it[1]),h('span',{},st[it[0]]?'fertig':it[2])));
+    var p=document.querySelector('[data-part="'+it[0]+'"]');
+    p.textContent=st[it[0]]?'fertig':'offen';p.classList.toggle('ok',!!st[it[0]]);
+  });
+}
+function changed(){save();var st=status();updateChecks(st);updateProgress(st);}
+
+/* ---------- Abgabe ---------- */
+function cl(s){return (s||'').replace(/\r/g,'').trim()||'(leer)';}
+function pc(s){return (s||'').replace(/\|/g,'/').replace(/\s*\n\s*/g,' ').trim();}
+function buildText(){
+  var st=status(),L=[];
+  var yn=function(b){return b?'fertig':'offen';};
+  L.push('AUFGABE 04 – ORDNUNG IM CHAOS – GRUPPENABGABE');
+  L.push('Gruppe: '+(S.team.trim()||'(fehlt)'));
+  L.push('Mitglieder: '+(S.members.trim()||'(fehlt)'));
+  L.push('Erstellt: '+new Date().toLocaleString('de-AT'));
+  L.push('Stand: Teil C '+yn(st.c)+' | Plot Twist '+yn(st.twist)+' | Teil D '+yn(st.d)+' | Reflexion '+yn(st.refl));
+  L.push('');L.push('== TEIL C: ZERLEGEN ==');
+  S.picks.forEach(function(id){
+    var x=BAD.filter(function(b){return b.id===id;})[0],d=S.c[id]||{};
+    L.push('Aussage: „'+x.t+'“');
+    STEPS.forEach(function(s){L.push('  '+s[1]+': '+cl(d[s[0]]));});
+    L.push('');
+  });
+  if(!S.picks.length){L.push('(keine Aussage gewählt)');L.push('');}
+  L.push('== PLOT TWIST ==');
+  L.push('Einordnung: '+(S.twist.art||'(leer)'));
+  L.push('Begründung: '+cl(S.twist.why));
+  L.push('Rückfrage 1: '+cl(S.twist.q1));
+  L.push('Rückfrage 2: '+cl(S.twist.q2));
+  L.push('');L.push('== TEIL D: ANFORDERUNGSKATALOG ==');
+  st.a.list.forEach(function(c){L.push((c.ok?'[x] ':'[ ] ')+c.l+': '+(c.l==='Eindeutige IDs'?(c.ok?'ok':'doppelt'):c.have+' / '+c.need));});
+  if(S.repo.trim())L.push('Repository: '+S.repo.trim());
+  L.push('');
+  L.push('| ID | Titel | Text | Art | Ebene | Quelle | Bezug | Status |');
+  L.push('|---|---|---|---|---|---|---|---|');
+  S.rows.filter(function(r){return !r.ex;}).forEach(function(r){
+    L.push('| '+[r.id,r.title,r.text,r.art||'–',r.ebene||'–',r.src,r.ref,r.status].map(pc).join(' | ')+' |');
+  });
+  L.push('');L.push('== REFLEXION ==');
+  L.push('1. Am schwersten einzuordnen: '+cl(S.refl.r1));
+  L.push('2. Frühere Rückfrage: '+cl(S.refl.r2));
+  L.push('3. Art und Ebene bei Konflikten: '+cl(S.refl.r3));
+  L.push('');L.push('Arbeitsstand (nicht ändern, damit das Team weiterarbeiten kann):');
+  L.push('<<<ARBEITSSTAND');L.push(JSON.stringify(S));L.push('ARBEITSSTAND>>>');
+  return L.join('\n');
+}
+function slug(s){return (s||'gruppe').trim().replace(/[^A-Za-z0-9ÄÖÜäöüß_-]+/g,'_').slice(0,40)||'gruppe';}
+var out=document.getElementById('outtext'),msg=document.getElementById('msg');
+document.getElementById('gen').addEventListener('click',function(){
+  var st=status(),w=[];
+  if(!S.team.trim())w.push('Der Gruppenname fehlt.');
+  if(!st.c)w.push('Teil C ist noch nicht vollständig.');
+  if(!st.twist)w.push('Der Plot Twist ist noch nicht vollständig.');
+  if(!st.d)w.push('Teil D erfüllt noch nicht alle Punkte der Prüfliste.');
+  if(!st.refl)w.push('Die Reflexion ist noch nicht vollständig.');
+  var wb=document.getElementById('warn');wb.hidden=!w.length;wb.textContent=w.length?'Noch offen: '+w.join(' '):'';
+  out.value=buildText();out.hidden=false;
+  document.getElementById('copy').hidden=false;
+  msg.textContent=w.length?'Ihr könnt trotzdem abgeben, der Stand wird mitgeliefert.':'Alles erfüllt.';
+  if(dl)document.getElementById('dl').hidden=false;
+});
+document.getElementById('copy').addEventListener('click',function(){
+  var done=function(){msg.textContent='Kopiert. Jetzt in Moodle einfügen.';};
+  var fb=function(){out.focus();out.select();try{document.execCommand('copy')?done():(msg.textContent='Bitte den markierten Text von Hand kopieren.');}catch(e){msg.textContent='Bitte den markierten Text von Hand kopieren.';}};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(out.value).then(done,fb);}else fb();
+});
+var dl={save:function(o){return new Promise(function(res,rej){try{var b=new Blob([o.data],{type:'text/plain;charset=utf-8'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download=o.filename;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},2000);res();}catch(e){rej(e);}});}};
+document.getElementById('dl').addEventListener('click',function(){
+  if(!dl)return;
+  dl.save({filename:'Aufgabe04_'+slug(S.team)+'.txt',data:out.value}).then(function(){msg.textContent='Datei gesichert.';},function(e){msg.textContent=(e&&e.code==='declined')?'Speichern abgebrochen.':'Speichern ist hier nicht möglich. Bitte kopieren.';});
+});
+document.getElementById('imp').addEventListener('click',function(){
+  var t=document.getElementById('imptext').value,m=document.getElementById('impmsg'),o=null;
+  try{var mm=/<<<ARBEITSSTAND\s*([\s\S]*?)\s*ARBEITSSTAND>>>/.exec(t);o=JSON.parse(mm?mm[1]:t.trim());}catch(e){m.textContent='Kein gültiger Arbeitsstand gefunden.';return;}
+  S=adopt(o);syncAll();m.textContent='Arbeitsstand geladen.';
+});
+document.getElementById('addrow').addEventListener('click',function(){
+  S.rows.push({id:nextId(),title:'',text:'',art:'',ebene:'',src:'',ref:'',status:'Entwurf',ex:false});
+  renderRows();changed();
+  var ta=document.querySelectorAll('#rows tr:last-child textarea')[0];if(ta)ta.focus();
+});
+document.getElementById('rmex').addEventListener('click',function(){
+  S.rows=S.rows.filter(function(r){return !r.ex;});renderRows();changed();
+});
+
+function renderFolders(){
+  var box=document.getElementById('folders');box.textContent='';
+  FOLDERS.forEach(function(f){box.append(h('label',{},h('input',{type:'checkbox','data-k':'folders.'+f}),f));});
+}
+function syncAll(){renderPicks();renderCards();renderRows();syncForm();changed();}
+
+load();renderFolders();syncAll();
+})();
+</script>
+</body>
+</html>
