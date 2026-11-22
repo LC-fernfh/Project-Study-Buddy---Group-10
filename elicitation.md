@@ -1,28 +1,28 @@
-Stakeholdergroup:
+## Stakeholdergroup:
 
-1. Students --> Relevanz: sehr wichtig
+## Students --> Relevanz: sehr wichtig
 Info needed: 
-- Matrikelnummer
-- Name 
-- Kontaktdaten (E-Mail, Telefonnummer)
-- Nationalität / Sprache
-- Welcher Studiengang
-- Semester
-- Belegte Kurse
-- Studienfortschritt
-- Letzter Login
+    - Matrikelnummer
+    - Name 
+    - Kontaktdaten (E-Mail, Telefonnummer)
+    - Nationalität / Sprache
+    - Welcher Studiengang
+    - Semester
+    - Belegte Kurse
+    - Studienfortschritt
+    - Letzter Login
 
 
-Erkenntnisziele (Outcome goals): 
+#### Erkenntnisziele (Outcome goals): 
  
 - Wir möchten verstehen welche Tools genutzt werden, um so den Studienalltag der Studierenden zu visualisieren (ohne Stress zu vermitteln)
 - Wir möchten versehen welche Form der Unterstützung gebraucht wird (Feedback,...), um den Studienalltag für Studierende zu verbessern
 - Ziel ist es, bei den Studierenden ein Gefühl der Sicherheit zu vermitteln und unnötigen Stress zu vermeiden.
 
-Technik:
--Fragebogen --> Aufgrund der Erreichbarkeit der FernFH Studierenden, sie verwenden den Study Buddy
+#### Technik:
+- Fragebogen --> Aufgrund der Erreichbarkeit der FernFH Studierenden, sie verwenden den Study Buddy
 
-Interviewleitfaden:
+#### Interviewleitfaden:
   1. Wie schaut eine typische Studienwoche aus?
   2. Wo findest du deine Aufgaben/Fristen?
   3. Hast du einen Überblick über deine Fortschritte?
@@ -31,27 +31,26 @@ Interviewleitfaden:
   6. Welche Funktionen sollte ein "Study-Buddy" haben?
   7. Welche Hilfsmittel nutzt du im Lernalltag?
   8. Was wäre ein Grund den "Study-Buddy" nicht zu nutzen? 
-  9. Was fällt dir noch ein? Haben wir etwas vergessen? 
+  9. Was fällt dir noch ein? Haben wir etwas vergessen?   
 
-2. FernFH Employees (Administrators, Lecturers) --> Relevanz: wichtig 
+## FernFH Employees (Administrators, Lecturers) --> Relevanz: wichtig 
 
 Info needed: 
 - Lern material
 - Name
 - Welche Kursleitung
 
-
-Erkenntnisziele (Outcome goals):
+#### Erkenntnisziele (Outcome goals):
 
 - Ziel ist es zu erkennen, ab wann ein Mensch in einer Situation einschreiten muss, um unnötigen Stress bei Studierenden zu vermeiden.
 - Es soll für den Lehrenden erkennbar sein, ob und wann ein Studierender einer hohen Belastung durch den Study Buddy ausgesetzt ist.
 - Es soll analysiert werden ob das Angebot von den Studierenden angenommen wird. 
 - Es soll herausgefunden werden, welche Informationen von den Studierenden für die Betreuung gebraucht werden. 
 
-Technik:
+#### Technik:
 -Fragebogen --> Aufgrund der Erreichbarkeit der Lehrenden (FernFH Employees), sie sind für den Inhalt des Study Buddys verantwortlich
 
-Interviewleitfaden: 
+#### Interviewleitfaden: 
 1. Wie behalten sie derzeit den Überblick über den Lernerfolg der Studierenden?
 2. Wie erkennen sie das ein Studierender mit der Lernsituation überfordert ist? 
 3. Welche Informationen werden von Studierenden benötigt um einen Lernerfolg maßgeblich zu beeinflussen.
@@ -62,21 +61,21 @@ Interviewleitfaden:
 8. In welchen Situationen sind Studierende gestresst? Wie wirkt sich das aus? 
 9. Gibt es aus Ihrer Perspektive noch Fragen, die nicht besprochen wurden? 
 
-AI-Challenge:
+## AI-Challenge:
 REQ-001: „Das System soll Studierende nach sieben Tagen Inaktivität automatisch erinnern.“
 
-Annahmen:
+#### Annahmen:
 - Fehlende Aktivität im System bedeutet, dass nicht gelernt wird und Unterstützung nötig ist.
 - Sieben Tage sind für alle Studierenden und alle Semesterphasen die passende Schwelle.
 Fehlende Informationen
 Was zählt als „Inaktivität“, zum Beispiel Login, Abgaben oder Lektionen?
 Über welchen Kanal wird erinnert, mit welchem Inhalt, und lässt sich die Erinnerung abschalten?
 
-Stakeholder*innen
+#### Stakeholder*innen
 Studierende: Bedarf, Akzeptanz, tatsächliche Lernrhythmen
 IT/Online Campus und Datenschutz: verfügbare Daten und ob die Auswertung zulässig ist
 
-Prüffragen
+#### Prüffragen
 „Wie lange lernen Sie typischerweise, ohne den Online Campus zu öffnen?“
 „Welche Benachrichtigungen empfinden Sie als hilfreich und welche als störend?“
 
@@ -86,14 +85,14 @@ Annahmen
 Studierende wünschen eine regelmäßige Übersicht, und Montag ist der passende Zeitpunkt.
 „Lernfortschritt“ lässt sich aus den vorhandenen Daten sinnvoll messen.
 
-Fehlende Informationen
+#### Fehlende Informationen
 Was bedeuten „Lernfortschritt“ und „personalisiert“ konkret?
 Wer erstellt und versendet die Übersicht? Der Satz steht im Passiv, das ist offen.
 
-Stakeholder*innen
+#### Stakeholder*innen
 Studierende: ob und wie sie eine Übersicht nutzen wollen
 Lehrende: was „Fortschritt“ in ihrer Lehrveranstaltung fachlich bedeutet
 
-Prüffragen
+#### Prüffragen
 „Wie verschaffen Sie sich heute einen Überblick, wo Sie im Studium stehen?“
 „Wann in der Woche planen Sie typischerweise Ihr Lernen?“
